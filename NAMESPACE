@@ -1,0 +1,5 @@
+exportPattern("^[[:alpha:]]+")
+importFrom("dplyr", "%>%")
+importFrom("ggplot2", "ggplot")
+importFrom("stats", "nlminb", "uniroot", "runif")
+importFrom("graphics", "hist", "lines")

@@ -1,0 +1,211 @@
+---
+title: "Computation of NTLKwIEx Distribution's Properties "
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MaVignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+# Remplacez xfun::isFALSE() par identical(x, FALSE)
+#knitr::opts_chunk$set(
+ # warning = identical(x, FALSE),
+  #message = identical(x, FALSE)
+#)
+```
+
+# Introduction to NTLKwIEx
+
+This vignette provides an overview of the "NTLKwIEx" package. The package NTLKwIEx offers a powerful range of statistical tools for analysis,simulation, and computation based on the Topp-Leone Kumaraswamy Inverse Exponential  (NTLKwIEx) distribution.
+ This distribution, which combines the properties of the Topp-Leone, Kumaraswamy, a new proposal and inverse exponential distributions,is particularly useful for modeling complex, heterogeneous data present in many scientific disciplines. With the "NTLKwIEx" package, users can estimate the parameters of the NTLKwIEx distribution from datasets, generate random samples according to this distribution, plot histograms and density functions, and calculate specific quantiles.
+ 
+## Installation
+
+You can install the "NTLKwIEx" package from CRAN using the following command:
+
+```R
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("NTLKwIEx")
+```
+# Load the packages
+
+```{r}
+library(stats)
+library(dplyr)
+library(ggplot2)
+library(NTLKwIEx)
+```
+
+## Overview of NTLKwIEx distribution
+
+The  distribution is particularly useful for modeling data with heavy tails, skewness, and positive values. It is a versatile distribution that can handle diverse characteristics in the data.
+
+## Probability density function (PDF) for NTLKwIEx distribution
+
+The probability density function (PDF) for the NTLKwIEx distribution is given by the formula:
+
+$$ f(x) = 2abm\dfrac{\theta}{x^{2}}\left( -\dfrac{\theta}{x}log\left( \alpha \right)+ exp\left( \dfrac{\theta}{x}\right)\right) \alpha^{exp\left(-\dfrac{\theta}{x}\right) }exp\left( -\dfrac{\theta}{x}\left(1+a\alpha^{exp\left(-\dfrac{\theta}{x}\right)}\right)\right) \left(1-exp\left( -a\dfrac{\theta}{x}\alpha^{exp\left(-\dfrac{\theta}{x}\right)} \right)\right)^{2b-1}\left(  1-\left(   1-exp\left( -\dfrac{a\theta}{x} \alpha^{exp\left(-\dfrac{\theta}{x}\right) }\right)\right)^{2b} \right)^{m-1} $$
+where  $$\left( \theta, \alpha , a , b, m\right) > 0 $$
+
+### Example 1
+
+Let's calculate the PDF for $x=1$ , $\theta=5$, $\alpha=4$ , $a=3$ , $b=2$ and $m=1$ 
+
+```{r}
+P_NTLKwIEx(x=1, teta=5, alpha=4, a=3, b=2, m=1)
+```
+
+### Example 2
+
+Let's calculate the PDF for $x=20.5$ , $\theta=4$, $\alpha=0.04$ , $a=1.2$ , $b=1.3$ and $m=2.1$ 
+
+```{r}
+P_NTLKwIEx(x=20.5, teta=4, alpha=0.04, a=1.2, b=1.3, m=2.1)
+```
+
+## Cumulative density function (CDF) for NTLKwIEx distribution
+
+The cumulative density function (CDF) for the NTLKwIEx distribution is given by the formula:
+
+$$	F(x)=\left(1-\left( 1-exp\left( -\dfrac{a\theta}{x} \alpha^{exp\left(-\dfrac{\theta}{x}\right) }\right)\right)^{2b} \right)^{m}$$ 
+where $$\left( \theta, \alpha , a , b, m\right) > 0 $$
+
+
+### Example 1
+
+Let's calculate the CDF for  $x=1$ , $\theta=5$, $\alpha=4$ , $a=3$ , $b=2$ and $m=1$ 
+```{r}
+C_NTLKwIEx(x=1, teta=5, alpha=4, a=3, b=2, m=1)
+
+```
+
+### Example 2
+
+Let's calculate the CDF for $x=20.5$ , $\theta=4$, $\alpha=0.04$ , $a=1.2$ , $b=1.3$ and $m=2.1$ 
+```{r}
+C_NTLKwIEx(x=20.5, teta=4, alpha=0.04, a=1.2, b=1.3, m=2.1)
+
+```
+
+## Graphical plot of the probability density function of NTLKwIEx distribution
+
+This function generates a graphical plot of the probability density function (PDF) for the NTLKwIEx distribution.
+
+### Example
+Let's plot the PDF for a range of values with parameters $\theta=1.8$, $\alpha=1.6$ , $a=3$ , $b=1.3$ and $m=1.6$ with $min\_x=0$ and $max\_x=100$ 
+```{r}
+
+Plot_PNTLKwIEx(teta=1.8, alpha = 1.6, a=3, b=1.3, m=1.6, min_x = 0, max_x = 100)
+
+```
+
+## Graphical plot of the cumulative density function of NTLKwIEx distribution
+
+This function generates a graphical plot of the cumulative density function (CDF) for the NTLKwIEx distribution.
+
+### Example
+
+Let's plot the CDF for a range of values with parameters $\theta=1.8$, $\alpha=1.6$ , $a=3$ , $b=1.3$ and $m=1.6$ with $min\_x=0$ and $max\_x=50$ 
+
+```{r}
+Plot_CNTLKwIEx(teta=1.8, alpha = 1.6, a=3, b=1.3, m=1.6, min_x = 0, max_x = 50)
+```
+
+##  Quantile function for NTLKwIEx distribution
+
+The quantile function calculates the quantile value for a given probability using the NTLKwIEx distribution.
+
+### Example 1
+
+Let's calculate the quantile using parameters $p=0.3$ , $\theta=1.8$, $\alpha=0.5$ , $a=5.4$ , $b=2.4$ and $m=8.2$ 
+```{r}
+
+Q_NTLKwIEx(p=0.3, teta = 1.8, alpha = 0.5, a=5.4, b=2.4, m=8.2)
+
+```
+
+### Example 2
+
+Let's calculate the 0.5 quantile (median) using parameters $p=0.5$ , $\theta=5.3$, $\alpha=3.2$ , $a=8.2$ , $b=1.8$ and $m=2.3$ 
+```{r}
+
+Q_NTLKwIEx(p=0.5, teta = 5.3, alpha = 3.2, a=8.2, b=1.8, m=2.3)
+
+```
+
+## Generate random samples from the NTLKwIEx distribution
+
+This function generates random samples from the NTLKwIEx distribution using the function ``` sapply```.
+
+### Example 1
+
+Let's generate 100 random samples with parameters  $\theta=5.3$, $\alpha=3.2$ , $a=8.2$ , $b=1.8$ and $m=2.3$ 
+```{r}
+set.seed(100)
+data=R_NTLKwIEx(100, teta = 5.3, alpha = 3.2, a=8.2, b=1.8, m=2.3)
+data
+```
+
+### Example 2
+
+Let's generate 150 random samples with parameters  $\theta=3.1$, $\alpha=0.2$ , $a=4.2$ , $b=2.8$ and $m=1.3$ 
+```{r}
+set.seed(100)
+data=R_NTLKwIEx(150, teta = 3.1, alpha = 0.2, a=4.2, b=2.8, m=1.3)
+data
+```
+
+
+## Estimate parameters with constraints
+
+This function estimates the parameters of the NTLKwIEx distribution while respecting constraints on the parameters.
+
+### Example 1
+Let's estimate parameters from a sample data vector.
+
+```{r}
+set.seed(100)
+data=R_NTLKwIEx(100, teta = 5.3, alpha = 3.2, a=8.2, b=1.8, m=2.3)
+E_NTLKwIEx(data)
+```
+
+### Example 2
+Let's estimate parameters from a sample data vector.
+
+```{r}
+set.seed(100)
+data=R_NTLKwIEx(150, teta = 3.1, alpha = 0.2, a=4.2, b=2.8, m=1.3)
+E_NTLKwIEx(data)
+```
+
+### Example 3
+Let's estimate parameters from a conductor failure times data.
+
+```{r}
+E_NTLKwIEx(ConductorFailureTimes)
+```
+
+## Estimate parameters with constraints and plot histogram with estimated density
+This function estimates parameters and plots the histogram of the data along with the estimated density curve.
+
+### Example 1
+
+```{r}
+set.seed(100)
+data=R_NTLKwIEx(100, teta = 5.3, alpha = 3.2, a=8.2, b=1.8, m=2.3)
+Sim_NTLKwIEx(data)
+```
+
+### Example 2
+
+```{r}
+Sim_NTLKwIEx(ConductorFailureTimes)
+```
+
+This concludes the overview of the "NTLKwIEx" package and its functionalities for working with the New Topp-Leone Kumaraswamy Inverse Exponential distribution.
