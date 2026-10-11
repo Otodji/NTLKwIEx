@@ -23,3 +23,5 @@ NeedsCompilation: no
 Packaged: 2026-04-14 10:32:06 UTC; Théophile OTODJI
 Repository: CRAN
 Date/Publication: 2026-04-14 13:10:02 UTC
+URL: https://github.com/Otodji/NTLKwIEx
+BugReports: https://github.com/Otodji/NTLKwIEx/issues
